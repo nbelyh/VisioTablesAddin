@@ -45,3 +45,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+/VisioTablesAddin/obj
+/.vs
+/VisioTablesAddin/bin/
