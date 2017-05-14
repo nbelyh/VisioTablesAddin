@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 
 Friend Class VisioTable
@@ -36,7 +37,7 @@ Friend Class VisioTable
     Private arrNewID() As Integer
     Private CountID As Integer = 0
 
-    Dim Vr As String = Strings.Left(Strings.Replace(vsoApp.Version, ".", ",", 1), InStr(vsoApp.Version, ",") - 1)
+    Dim Vr As String = Regex.Replace(vsoApp.Version, "[.,].*$", "")
     Dim arrL = {"0.1 pt", "0", "1", "0 mm", "0", "0", "0", "0", "0", "0%"}
     Dim arrF = {"1", "0", "1", "0", "1", "0", "0%", "0%", "0%", "0%", "0", "0 mm", "0 mm", "0 deg", "100%"}
     Dim VarCell As Byte = 0
@@ -463,7 +464,7 @@ errD:
                     .Cells("LineColor").FormulaForceU = GI & sh & arrNewID(0) & strATC & strThGu191 & "," & strThGu255 & "))"
             End Select
 
-            If Vr = 15 Then ' Секция Theme Properties для Visio 2013
+            If Vr >= 15 Then ' Секция Theme Properties для Visio 2013
                 For i = 0 To 7
                     .CellsSRC(1, 31, i).FormulaForceU = GU & 0 & ")"
                 Next
